@@ -108,23 +108,18 @@ The project imports **Three.js v0.160.0** directly through a browser import map.
 ```text
 BLOCK-SNAKE-3D/
 │
-├── index.html
+├── 📁 css/
 │
-├── css/
-│   └── styles.css
+├── 📁 js/
 │
-├── js/
-│   └── main.js
-│
-├── assets/
-│   └── ...
-│
-├── server.ps1
-├── launch.bat
-├── launch.vbs
-├── .gitignore
-├── server.log
-└── README.md
+├── 📄 LICENSE
+├── 📄 README.md
+├── 📄 index.html
+├── 📄 launch.bat
+├── 📄 launch.vbs
+├── 🖼️ logo.png
+├── 📄 server.log
+└── 📄 server.ps1
 ```
 
 ---
