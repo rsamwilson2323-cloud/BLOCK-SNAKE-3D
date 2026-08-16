@@ -1,0 +1,791 @@
+:root {
+  --font-heading: 'Press Start 2P', cursive;
+  --font-body: 'Silkscreen', sans-serif;
+  --bg-dark: #1a1c2e;
+  --panel-bg: #262b44;
+  --panel-border: #10121d;
+  --panel-highlight: #5a6988;
+  --panel-shadow: #181a28;
+  --text-main: #f0e8d8;
+  --text-muted: #8b9bb4;
+  --gold: #f0c265;
+  --gold-dark: #8b6d20;
+  --gold-light: #fff2a8;
+  --green: #4a8a2f;
+  --red: #cc3333;
+  --sky-blue: #87CEEB;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  user-select: none;
+  border-radius: 0 !important;
+  -webkit-font-smoothing: none !important;
+  -moz-osx-font-smoothing: unset !important;
+  font-smooth: never !important;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background-color: var(--bg-dark);
+  color: var(--text-main);
+  font-family: var(--font-body);
+  touch-action: none;
+  overscroll-behavior: none;
+  -webkit-text-size-adjust: 100%;
+}
+
+/* ===== GAME CANVAS ===== */
+#game-container {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  overflow: hidden;
+}
+
+#game-container canvas {
+  display: block;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+#vignette {
+  position: fixed;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at center, rgba(0,0,0,0) 42%, rgba(8,10,18,0.42) 100%);
+}
+
+.hidden {
+  display: none !important;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* ===== HUD LAYER ===== */
+#hud-layer {
+  position: fixed;
+  inset: 0;
+  z-index: 10;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+/* Use CSS Grid for corner-anchored HUD placement — never overflows */
+.hud-top-left {
+  position: fixed;
+  top: 8px;
+  left: 8px;
+  z-index: 11;
+  max-width: 40vw;
+}
+
+.hud-top-right {
+  position: fixed;
+  top: 8px;
+  right: 8px;
+  z-index: 11;
+  max-width: 40vw;
+}
+
+.hud-top-center {
+  position: fixed;
+  top: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 11;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  max-width: 50vw;
+}
+
+.hud-bottom-left {
+  position: fixed;
+  bottom: 8px;
+  left: 8px;
+  z-index: 11;
+  max-width: 40vw;
+}
+
+.hud-bottom-right {
+  position: fixed;
+  bottom: 8px;
+  right: 8px;
+  z-index: 11;
+  display: flex;
+  gap: 8px;
+}
+
+/* ===== PIXEL PANEL ===== */
+.pixel-panel {
+  background: var(--panel-bg);
+  pointer-events: auto;
+  padding: 8px 10px;
+  box-shadow:
+    -2px 0 0 0 var(--panel-border),
+    2px 0 0 0 var(--panel-border),
+    0 -2px 0 0 var(--panel-border),
+    0 2px 0 0 var(--panel-border),
+    -2px -2px 0 0 var(--panel-border),
+    2px -2px 0 0 var(--panel-border),
+    -2px 2px 0 0 var(--panel-border),
+    2px 2px 0 0 var(--panel-border),
+    inset 1px 1px 0 0 var(--panel-highlight),
+    inset -1px -1px 0 0 var(--panel-shadow);
+}
+
+.banner-panel {
+  font-size: clamp(6px, 1.2vw, 8px);
+  padding: 4px 10px;
+  font-family: var(--font-heading);
+}
+
+.meter-panel {
+  min-width: 100px;
+  max-width: 180px;
+  width: 20vw;
+}
+
+/* ===== HUD TYPOGRAPHY ===== */
+.hud-label {
+  font-family: var(--font-heading);
+  font-size: clamp(6px, 1.2vw, 8px);
+  letter-spacing: 1px;
+  color: var(--text-muted);
+  margin-bottom: 2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.hud-value {
+  font-family: var(--font-heading);
+  font-size: clamp(12px, 3vw, 20px);
+  color: var(--gold);
+  white-space: nowrap;
+}
+
+.hud-sub {
+  font-family: var(--font-body);
+  font-size: clamp(6px, 1.2vw, 8px);
+  color: var(--text-muted);
+}
+
+/* ===== METER BARS ===== */
+.meter-bar-bg {
+  height: clamp(8px, 1.5vh, 14px);
+  background: #10121d;
+  border: 2px solid var(--panel-highlight);
+  box-shadow: inset 1px 1px 0 0 #000;
+  width: 100%;
+}
+
+.meter-bar-fill {
+  height: 100%;
+  transition: width 0.1s steps(8);
+}
+
+.nitro-fill {
+  background: repeating-linear-gradient(90deg, #f0c265 0px, #f0c265 6px, #10121d 6px, #10121d 8px);
+}
+
+.jump-fill {
+  background: repeating-linear-gradient(90deg, #4a8a2f 0px, #4a8a2f 6px, #10121d 6px, #10121d 8px);
+}
+
+/* ===== BUFF BADGES ===== */
+#buff-container {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.buff-badge {
+  background: rgba(240,194,101,0.2);
+  border: 2px solid var(--gold);
+  color: var(--gold);
+  padding: 3px 6px;
+  font-size: clamp(6px, 1.2vw, 8px);
+  font-family: var(--font-heading);
+  pointer-events: auto;
+  white-space: nowrap;
+}
+
+/* ===== AUDIO ICON ===== */
+.icon-btn {
+  width: clamp(36px, 5vw, 44px);
+  height: clamp(36px, 5vw, 44px);
+  font-size: clamp(12px, 2vw, 16px);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  color: var(--text-main);
+  touch-action: manipulation;
+  flex-shrink: 0;
+}
+.icon-btn:hover {
+  border-color: var(--gold);
+}
+
+/* ===== OVERLAY SCREENS ===== */
+.overlay-screen {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  background: rgba(26,28,46,0.92);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 16px;
+  padding: max(16px, env(safe-area-inset-top)) max(16px, env(safe-area-inset-right)) max(16px, env(safe-area-inset-bottom)) max(16px, env(safe-area-inset-left));
+  touch-action: manipulation;
+  pointer-events: auto;
+}
+
+.center-content {
+  text-align: center;
+}
+
+/* ===== MODALS ===== */
+.pixel-modal {
+  background: var(--panel-bg);
+  max-width: min(480px, calc(100vw - 32px));
+  width: 100%;
+  max-height: calc(100vh - 32px);
+  overflow-y: auto;
+  padding: clamp(16px, 4vw, 28px) clamp(16px, 4vw, 28px);
+  box-shadow:
+    -3px 0 0 0 var(--panel-border),
+    3px 0 0 0 var(--panel-border),
+    0 -3px 0 0 var(--panel-border),
+    0 3px 0 0 var(--panel-border),
+    -3px -3px 0 0 var(--panel-border),
+    3px -3px 0 0 var(--panel-border),
+    -3px 3px 0 0 var(--panel-border),
+    3px 3px 0 0 var(--panel-border),
+    inset 2px 2px 0 0 var(--panel-highlight),
+    inset -2px -2px 0 0 var(--panel-shadow),
+    6px 6px 0 rgba(0,0,0,0.3);
+}
+
+.badge {
+  font-family: var(--font-heading);
+  font-size: clamp(6px, 1.4vw, 8px);
+  color: var(--text-muted);
+  letter-spacing: 2px;
+  margin-bottom: 6px;
+  text-align: center;
+}
+
+.pixel-title {
+  font-family: var(--font-heading);
+  font-size: clamp(16px, 5vw, 28px);
+  color: var(--gold);
+  text-shadow: 2px 2px 0 var(--gold-dark);
+  margin-bottom: 10px;
+  text-align: center;
+  word-break: break-word;
+}
+
+.title-over {
+  font-family: var(--font-heading);
+  font-size: clamp(14px, 4vw, 22px);
+  color: var(--red);
+  text-shadow: 2px 2px 0 #660000;
+  margin-bottom: 12px;
+}
+
+.alert-tag {
+  color: var(--red);
+  font-family: var(--font-heading);
+  font-size: clamp(6px, 1.4vw, 8px);
+  margin-bottom: 6px;
+}
+
+.description {
+  font-family: var(--font-body);
+  font-size: clamp(11px, 2vw, 14px);
+  color: var(--text-muted);
+  line-height: 1.5;
+  text-align: center;
+}
+
+/* ===== CONTROLS GUIDE ===== */
+.controls-guide {
+  background: #1a1c2e;
+  border: 2px solid var(--panel-border);
+  padding: clamp(8px, 2vw, 14px);
+  margin: 10px 0;
+  text-align: center;
+  font-size: clamp(10px, 1.8vw, 14px);
+}
+
+.control-row {
+  margin-bottom: 6px;
+  line-height: 1.8;
+}
+.control-row:last-child {
+  margin-bottom: 0;
+}
+
+.key {
+  display: inline-block;
+  background: #3a3f5c;
+  border: 2px solid #5a6988;
+  color: #fff;
+  font-family: var(--font-heading);
+  font-size: clamp(6px, 1.2vw, 8px);
+  padding: 3px 6px;
+  margin: 0 2px;
+  box-shadow: 0 2px 0 #10121d;
+  transform: translateY(-1px);
+}
+
+/* ===== BUTTONS ===== */
+.btn-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 16px;
+  align-items: center;
+}
+
+.pixel-btn {
+  touch-action: manipulation;
+  background: var(--gold);
+  color: var(--panel-border);
+  font-family: var(--font-heading);
+  font-size: clamp(9px, 2vw, 13px);
+  padding: clamp(8px, 2vh, 14px) clamp(12px, 3vw, 20px);
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  max-width: min(280px, 80vw);
+  box-shadow:
+    0 -2px 0 0 var(--gold-light),
+    -2px 0 0 0 var(--gold-light),
+    0 2px 0 0 var(--gold-dark),
+    2px 0 0 0 var(--gold-dark),
+    0 0 0 2px var(--panel-border);
+  transition: transform 0.1s;
+  white-space: nowrap;
+}
+
+.pixel-btn:hover {
+  background: #ffd280;
+  transform: translateY(-2px);
+}
+
+.pixel-btn:active {
+  transform: translateY(2px);
+  box-shadow:
+    0 -2px 0 0 var(--gold-dark),
+    -2px 0 0 0 var(--gold-dark),
+    0 2px 0 0 var(--gold-light),
+    2px 0 0 0 var(--gold-light),
+    0 0 0 2px var(--panel-border);
+}
+
+.pixel-btn.secondary {
+  background: var(--panel-highlight);
+  color: var(--text-main);
+  box-shadow:
+    0 -2px 0 0 #7a8ba8,
+    -2px 0 0 0 #7a8ba8,
+    0 2px 0 0 #3a4560,
+    2px 0 0 0 #3a4560,
+    0 0 0 2px var(--panel-border);
+}
+
+.pixel-btn.secondary:hover {
+  background: #7a8ba8;
+}
+
+.pixel-btn.secondary:active {
+  box-shadow:
+    0 -2px 0 0 #3a4560,
+    -2px 0 0 0 #3a4560,
+    0 2px 0 0 #7a8ba8,
+    2px 0 0 0 #7a8ba8,
+    0 0 0 2px var(--panel-border);
+}
+
+/* ===== GAME OVER STATS ===== */
+.stats-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+}
+
+.stat-box {
+  background: #1a1c2e;
+  border: 2px solid var(--panel-border);
+  padding: clamp(6px, 1.5vw, 12px);
+  text-align: center;
+}
+
+.stat-lbl {
+  font-family: var(--font-heading);
+  font-size: clamp(5px, 1.2vw, 7px);
+  color: var(--text-muted);
+  margin-bottom: 4px;
+}
+
+.stat-val {
+  font-family: var(--font-heading);
+  font-size: clamp(10px, 2.5vw, 16px);
+  color: var(--gold);
+}
+
+/* ===== ANIMATIONS ===== */
+.pixel-blink {
+  animation: retro-blink 1s steps(2, start) infinite;
+}
+
+@keyframes retro-blink {
+  to { visibility: hidden; }
+}
+
+.touch-controls-hint {
+  display: none;
+}
+
+/* ===== TOUCH CONTROLS ===== */
+#touch-controls {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 30;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding: 0 max(16px, env(safe-area-inset-right)) max(14px, env(safe-area-inset-bottom)) max(16px, env(safe-area-inset-left));
+  pointer-events: none;
+}
+
+#joystick-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  pointer-events: none;
+}
+
+#joystick-zone {
+  width: 118px;
+  height: 118px;
+  background: rgba(26, 28, 46, 0.45);
+  border: 3px solid rgba(16, 18, 29, 0.9);
+  border-radius: 50% !important;
+  position: relative;
+  pointer-events: auto;
+  flex-shrink: 0;
+  touch-action: none;
+}
+
+#joystick-deadzone {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 28%;
+  height: 28%;
+  transform: translate(-50%, -50%);
+  border: 2px dashed rgba(240, 194, 101, 0.35);
+  border-radius: 50% !important;
+  pointer-events: none;
+}
+
+#joystick-stick {
+  width: 44px;
+  height: 44px;
+  background: var(--gold);
+  border: 3px solid var(--panel-border);
+  border-radius: 50% !important;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  box-shadow: 0 3px 0 var(--gold-dark);
+}
+
+.touch-hint {
+  font-family: var(--font-heading);
+  font-size: 7px;
+  color: rgba(240, 232, 216, 0.7);
+  letter-spacing: 1px;
+  text-shadow: 0 1px 2px #000;
+}
+
+#touch-actions {
+  display: flex;
+  flex-direction: column-reverse;
+  gap: 12px;
+  align-items: center;
+  pointer-events: auto;
+  flex-shrink: 0;
+  padding-bottom: 8px;
+}
+
+.touch-btn {
+  width: 72px;
+  height: 72px;
+  background: var(--panel-bg);
+  border: 3px solid var(--panel-border);
+  border-radius: 50% !important;
+  color: var(--text-main);
+  font-family: var(--font-heading);
+  font-size: 10px;
+  box-shadow: 0 4px 0 var(--panel-shadow);
+  flex-shrink: 0;
+  touch-action: manipulation;
+  line-height: 1.2;
+}
+.touch-btn-boost {
+  background: var(--gold);
+  color: var(--panel-border);
+  width: 80px;
+  height: 80px;
+  font-size: 11px;
+}
+.touch-btn.pressed,
+.touch-btn:active {
+  transform: translateY(4px);
+  box-shadow: none;
+}
+
+/* ===== TOUCH UI HUD: no overlap with joystick / buttons ===== */
+body.touch-ui .desktop-controls-hint {
+  display: none;
+}
+body.touch-ui .touch-controls-hint {
+  display: block;
+}
+
+body.touch-ui .hud-top-left {
+  top: max(8px, env(safe-area-inset-top));
+  left: max(8px, env(safe-area-inset-left));
+  max-width: 34vw;
+}
+
+body.touch-ui .hud-top-right {
+  top: max(8px, env(safe-area-inset-top));
+  right: max(56px, calc(8px + env(safe-area-inset-right) + 44px));
+  max-width: 32vw;
+}
+
+body.touch-ui .hud-top-center {
+  top: max(8px, env(safe-area-inset-top));
+  max-width: 38vw;
+}
+
+body.touch-ui .hud-bottom-right {
+  top: max(8px, env(safe-area-inset-top));
+  right: max(8px, env(safe-area-inset-right));
+  bottom: auto;
+  flex-direction: column;
+  gap: 6px;
+}
+
+body.touch-ui .hud-bottom-left {
+  left: max(8px, env(safe-area-inset-left));
+  bottom: calc(148px + env(safe-area-inset-bottom));
+  max-width: 42vw;
+}
+
+body.touch-ui .meter-panel {
+  min-width: 110px;
+  width: 36vw;
+  max-width: 160px;
+}
+
+body.touch-ui .icon-btn {
+  width: 40px;
+  height: 40px;
+}
+
+body.touch-ui .pixel-panel {
+  padding: 6px 8px;
+}
+
+body.touch-ui .hud-value {
+  font-size: 14px;
+}
+
+body.touch-ui .pixel-btn {
+  min-height: 48px;
+}
+
+/* ===== RESPONSIVE: SMALL SCREENS ===== */
+@media (max-width: 600px) {
+  .hud-top-left,
+  .hud-top-right {
+    max-width: 36vw;
+  }
+  .hud-top-left, .hud-top-right {
+    top: 4px;
+  }
+  .hud-top-left {
+    left: 4px;
+  }
+  .hud-top-right {
+    right: 4px;
+  }
+  .pixel-panel {
+    padding: 5px 7px;
+  }
+  .meter-panel {
+    min-width: 80px;
+    width: 28vw;
+  }
+  .hud-value {
+    font-size: clamp(10px, 4vw, 16px);
+  }
+  .pixel-modal {
+    padding: 12px 14px;
+  }
+  .pixel-title {
+    font-size: clamp(12px, 5vw, 20px);
+  }
+  .controls-guide {
+    padding: 6px;
+  }
+  .control-row {
+    margin-bottom: 4px;
+    font-size: 10px;
+  }
+  .btn-group {
+    gap: 8px;
+    margin-top: 10px;
+  }
+  .pixel-btn {
+    padding: 8px 12px;
+  }
+
+  body.touch-ui .hud-top-left {
+    max-width: 32vw;
+  }
+  body.touch-ui .hud-top-right {
+    right: 52px;
+    max-width: 30vw;
+  }
+  body.touch-ui .hud-top-center {
+    max-width: 34vw;
+  }
+  body.touch-ui #joystick-zone {
+    width: 108px;
+    height: 108px;
+  }
+  body.touch-ui .touch-btn {
+    width: 64px;
+    height: 64px;
+    font-size: 9px;
+  }
+  body.touch-ui .touch-btn-boost {
+    width: 72px;
+    height: 72px;
+  }
+  body.touch-ui .hud-bottom-left {
+    bottom: calc(136px + env(safe-area-inset-bottom));
+  }
+}
+
+/* ===== RESPONSIVE: VERY SHORT VIEWPORTS ===== */
+@media (max-height: 500px) {
+  .pixel-modal {
+    padding: 10px 14px;
+  }
+  .pixel-title {
+    font-size: clamp(12px, 4vw, 18px);
+    margin-bottom: 6px;
+  }
+  .description {
+    font-size: 10px;
+    line-height: 1.3;
+  }
+  .controls-guide {
+    margin: 6px 0;
+    padding: 6px;
+  }
+  .btn-group {
+    gap: 6px;
+    margin-top: 8px;
+  }
+  .pixel-btn {
+    padding: 6px 10px;
+    font-size: 9px;
+  }
+  .stats-grid {
+    gap: 4px;
+  }
+  .stat-box {
+    padding: 6px;
+  }
+
+  body.touch-ui .hud-top-center {
+    display: none;
+  }
+  body.touch-ui .touch-hint {
+    display: none;
+  }
+  body.touch-ui #joystick-zone {
+    width: 84px;
+    height: 84px;
+  }
+  body.touch-ui #joystick-stick {
+    width: 34px;
+    height: 34px;
+  }
+  body.touch-ui .touch-btn {
+    width: 52px;
+    height: 52px;
+    font-size: 8px;
+  }
+  body.touch-ui .touch-btn-boost {
+    width: 58px;
+    height: 58px;
+  }
+  body.touch-ui .hud-bottom-left {
+    bottom: calc(96px + env(safe-area-inset-bottom));
+    max-width: 28vw;
+  }
+  body.touch-ui #touch-actions {
+    flex-direction: row;
+    padding-bottom: 0;
+    gap: 8px;
+  }
+}
+
+/* ===== RESPONSIVE: LARGE SCREENS ===== */
+@media (min-width: 1400px) {
+  .pixel-panel {
+    padding: 10px 14px;
+  }
+  .hud-top-left, .hud-top-right {
+    top: 16px;
+  }
+  .hud-top-left, .hud-bottom-left {
+    left: 16px;
+  }
+  .hud-top-right, .hud-bottom-right {
+    right: 16px;
+  }
+  .hud-bottom-left, .hud-bottom-right {
+    bottom: 16px;
+  }
+}

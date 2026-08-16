@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>BLOCK SNAKE 3D - Retro Voxel Snake Game</title>
+    <meta name="description" content="A blocky 16-bit 3D snake game">
+    <link rel="icon" href="data:,">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Silkscreen:wght@400;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="css/styles.css">
+    
+    <!-- Three.js importmap -->
+    <script type="importmap">
+        {
+            "imports": {
+                "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+                "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+            }
+        }
+    </script>
+</head>
+<body>
+    <!-- WebGL Canvas Container -->
+    <div id="game-container"></div>
+    <div id="vignette"></div>
+
+    <!-- HUD Layer -->
+    <div id="hud-layer" class="hidden">
+        
+        <!-- Top Left: Score -->
+        <div class="hud-top-left">
+            <div class="pixel-panel">
+                <div class="hud-label">SCORE</div>
+                <div id="score-display" class="hud-value">0</div>
+                <div class="hud-sub">HIGH: <span id="high-score-display">0</span></div>
+            </div>
+        </div>
+
+        <!-- Top Right: Length & Level -->
+        <div class="hud-top-right">
+            <div class="pixel-panel">
+                <div class="hud-label">LENGTH</div>
+                <div id="length-display" class="hud-value">0</div>
+                <div class="hud-label" style="margin-top: 8px;">LEVEL</div>
+                <div id="sector-display" class="hud-value">1</div>
+            </div>
+        </div>
+
+        <!-- Top Center: Objective -->
+        <div class="hud-top-center">
+            <div id="objective-banner" class="pixel-panel banner-panel">
+                APPLES 0/8
+            </div>
+            <div id="buff-container"></div>
+        </div>
+
+        <!-- Bottom Left: Meters -->
+        <div class="hud-bottom-left">
+            <div class="pixel-panel meter-panel">
+                <div class="hud-label">BOOST <span id="nitro-val" class="hud-sub">100%</span></div>
+                <div class="meter-bar-bg">
+                    <div id="nitro-bar" class="meter-bar-fill nitro-fill" style="width: 100%;"></div>
+                </div>
+                
+                <div class="hud-label" style="margin-top: 8px;">JUMP <span id="jump-val" class="hud-sub">READY</span></div>
+                <div class="meter-bar-bg">
+                    <div id="jump-bar" class="meter-bar-fill jump-fill" style="width: 100%;"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Icon cluster: desktop bottom-right, mobile top-right via CSS -->
+        <div class="hud-bottom-right" id="hud-icons">
+            <button id="pause-btn" class="icon-btn pixel-panel" type="button" aria-label="Pause">
+                <span id="pause-icon">⏸</span>
+            </button>
+            <button id="settings-btn" class="icon-btn pixel-panel" type="button" aria-label="Settings">
+                <span id="settings-icon">⚙</span>
+            </button>
+            <button id="audio-toggle-btn" class="icon-btn pixel-panel" type="button" aria-label="Audio">
+                <span id="audio-icon">🔊</span>
+            </button>
+        </div>
+
+    </div>
+
+    <!-- Loading Screen -->
+    <div id="loading-screen" class="overlay-screen">
+        <div class="pixel-modal center-content">
+            <h2 class="pixel-title">INITIALIZING</h2>
+            <div class="meter-bar-bg" style="width: 80%; margin: 20px auto; height: 20px;">
+                <div id="loading-bar" class="meter-bar-fill" style="width: 0%; background: #2ECC71;"></div>
+            </div>
+            <p id="loading-text" class="description">Generating Voxel Worlds...</p>
+        </div>
+    </div>
+
+    <!-- Start Screen -->
+    <div id="start-screen" class="overlay-screen">
+        <div class="pixel-modal">
+            <div class="badge">◆ VOXEL EDITION ◆</div>
+            <h1 class="pixel-title">BLOCK SNAKE 3D</h1>
+            <p class="description">Navigate the voxel world. Collect apples to grow. Avoid your own tail and obstacles. Survive as long as possible!</p>
+            
+            <div class="controls-guide">
+                <div class="hud-label" style="margin-bottom: 8px;">CONTROLS</div>
+                <div class="control-row desktop-controls-hint">
+                    <span class="key">W</span><span class="key">A</span><span class="key">S</span><span class="key">D</span> / Arrows to Move
+                </div>
+                <div class="control-row desktop-controls-hint">
+                    <span class="key">SHIFT</span> Boost &nbsp;&nbsp; <span class="key">SPACE</span> Jump
+                </div>
+                <div class="control-row desktop-controls-hint">
+                    <span class="key">P</span> Pause
+                </div>
+                <div class="control-row touch-controls-hint">
+                    Left stick steers &nbsp;·&nbsp; JUMP / BOOST on the right
+                </div>
+            </div>
+
+            <div class="btn-group">
+                <button id="start-campaign-btn" class="pixel-btn">► START GAME</button>
+                <button id="start-endless-btn" class="pixel-btn secondary">► ENDLESS MODE</button>
+            </div>
+
+            <div class="credits" style="margin-top: 25px; font-size: 10px; color: #888; text-transform: uppercase;">
+                Creator & Developer: Chahek Sinha<br>
+                <span style="font-size: 8px; color: #555; margin-top: 5px; display: inline-block;">License: MIT | 2026</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pause Screen -->
+    <div id="pause-screen" class="overlay-screen hidden">
+        <div class="pixel-modal center-content">
+            <h2 class="pixel-title pixel-blink">PAUSED</h2>
+            <p class="description" style="margin-bottom: 24px;">Tap RESUME or press P / ESC</p>
+            
+            <div class="btn-group">
+                <button id="resume-btn" class="pixel-btn" type="button">RESUME</button>
+                <button id="restart-pause-btn" class="pixel-btn secondary" type="button">RESTART</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Settings Screen -->
+    <div id="settings-screen" class="overlay-screen hidden">
+        <div class="pixel-modal center-content">
+            <h2 class="pixel-title">SETTINGS</h2>
+            
+            <div class="settings-grid" style="text-align: left; margin-bottom: 20px; width: 100%;">
+                <div class="control-row" style="display: flex; justify-content: space-between; align-items: center;">
+                    <span style="font-size: 12px;">Audio</span>
+                    <button id="settings-audio-btn" class="pixel-btn" style="padding: 10px 15px; font-size: 10px;">ON</button>
+                </div>
+                <div class="control-row" style="display: flex; justify-content: space-between; align-items: center; margin-top: 10px;">
+                    <span style="font-size: 12px;">Graphics</span>
+                    <button id="settings-graphics-btn" class="pixel-btn" style="padding: 10px 15px; font-size: 10px;">ULTRA</button>
+                </div>
+                <div class="control-row" style="display: flex; justify-content: space-between; align-items: center; margin-top: 10px;">
+                    <span style="font-size: 12px;">Bloom</span>
+                    <button id="settings-bloom-btn" class="pixel-btn" style="padding: 10px 15px; font-size: 10px;">ON</button>
+                </div>
+            </div>
+            
+            <div class="btn-group">
+                <button id="close-settings-btn" class="pixel-btn secondary">CLOSE</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Game Over Screen -->
+    <div id="game-over-screen" class="overlay-screen hidden">
+        <div class="pixel-modal center-content">
+            <div class="alert-tag">SYSTEM FAILURE</div>
+            <h2 class="title-over">GAME OVER</h2>
+            
+            <div class="stats-grid">
+                <div class="stat-box">
+                    <div class="stat-lbl">FINAL SCORE</div>
+                    <div id="final-score" class="stat-val">0</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-lbl">HIGH SCORE</div>
+                    <div id="final-high-score" class="stat-val">0</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-lbl">APPLES</div>
+                    <div id="final-cores" class="stat-val">0</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-lbl">LENGTH</div>
+                    <div id="final-length" class="stat-val">0</div>
+                </div>
+            </div>
+
+            <div class="btn-group">
+                <button id="restart-btn" class="pixel-btn">► RETRY</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Touch Controls -->
+    <div id="touch-controls" class="hidden">
+        <div id="joystick-wrap">
+            <div id="joystick-zone">
+                <div id="joystick-deadzone"></div>
+                <div id="joystick-stick"></div>
+            </div>
+            <div class="touch-hint">STEER</div>
+        </div>
+        <div id="touch-actions">
+            <button id="touch-jump-btn" class="touch-btn" type="button">JUMP</button>
+            <button id="touch-boost-btn" class="touch-btn touch-btn-boost" type="button">BOOST</button>
+        </div>
+    </div>
+
+    <!-- Main Entry Point -->
+    <script type="module" src="js/main.js"></script>
+</body>
+</html>
