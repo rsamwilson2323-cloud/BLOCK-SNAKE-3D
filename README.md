@@ -1,105 +1,485 @@
-# 🐍 BLOCK SNAKE 3D — Retro Voxel Snake Game
+# 🐍 BLOCK SNAKE 3D
 
-**BLOCK SNAKE 3D** is a browser-based **3D voxel snake game** built with **HTML, CSS, JavaScript, and Three.js**.
+### 🎮 Retro Voxel Snake Game • 3D WebGL • Arcade Gameplay
 
-Navigate through a neon voxel world, collect apples to grow, avoid your own tail and obstacles, and survive as long as possible.
+<p align="center">
+  <img src="logo.png" alt="BLOCK SNAKE 3D Logo" width="420">
+</p>
 
-The game features a retro **16-bit / voxel-inspired visual style**, real-time HUD elements, boost and jump mechanics, campaign and endless game modes, desktop keyboard controls, and mobile touch controls.
+<p align="center">
+  <strong>🐍 COLLECT • GROW • SURVIVE 🍎</strong>
+</p>
+
+<p align="center">
+  A neon-powered 3D voxel snake game built for the browser.
+</p>
+
+<p align="center">
+  <a href="https://github.com/rsamwilson2323-cloud/BLOCK-SNAKE-3D">Repository</a>
+  •
+  <a href="https://github.com/rsamwilson2323-cloud/BLOCK-SNAKE-3D/issues">Issues</a>
+  •
+  <a href="https://github.com/rsamwilson2323-cloud/BLOCK-SNAKE-3D/blob/main/LICENSE">MIT License</a>
+</p>
+
+---
+
+# 🐍 About The Game
+
+**BLOCK SNAKE 3D** is a browser-based **3D voxel snake game** built using:
+
+* 🌐 HTML5
+* 🎨 CSS3
+* ⚡ JavaScript
+* 🎮 Three.js
+* 🧊 WebGL
+* 🖥️ PowerShell
+
+The game combines the classic snake gameplay concept with a modern **3D voxel environment**, neon arcade visuals, boost mechanics, jumping, obstacles, multiple game modes, and responsive mobile controls.
+
+Navigate through the voxel world, collect apples, grow your snake, avoid collisions, and try to achieve the highest possible score.
 
 ---
 
 # ✨ Features
 
-🎮 **3D Voxel Gameplay**
+## 🎮 3D Voxel Gameplay
 
-* Explore a block-style 3D game world
-* Retro 16-bit inspired visual design
-* Built using Three.js WebGL
+* Explore a block-style 3D environment
+* Real-time WebGL rendering
+* Retro arcade-inspired graphics
+* Neon voxel visual effects
+* Dynamic 3D camera and gameplay environment
+* Three.js-powered rendering
 
-🍎 **Apple Collection**
+---
 
-* Collect apples to increase your score
-* Track collected apples through the objective HUD
-* Grow your snake as you progress
+## 🍎 Apple Collection
 
-🐍 **Snake Growth**
+Collect apples throughout the game world.
 
-* Snake length increases during gameplay
-* Avoid colliding with your own tail
-* Survive as long as possible
+Each collection contributes toward your gameplay objectives and helps your snake grow.
 
-🚀 **Boost System**
+The HUD provides real-time information about:
 
-* Use the BOOST ability to move faster
-* Real-time boost meter
-* Keyboard and touch support
+```text
+APPLES 0/8
+```
 
-🦘 **Jump System**
+and other gameplay statistics.
 
-* Jump through the voxel environment
-* Real-time jump meter
-* SPACE key / mobile JUMP button
+---
 
-🎯 **Multiple Game Modes**
+## 🐍 Snake Growth
 
-* ► START GAME
-* ► ENDLESS MODE
+As you collect apples:
 
-📊 **Live HUD**
+* Your snake grows
+* Your score increases
+* Your length increases
+* Gameplay becomes more challenging
+* You must avoid your own body
 
-* Current score
-* High score
-* Snake length
-* Current level
-* Apple objective
-* Boost meter
-* Jump meter
-* Game status controls
+The goal is to survive while achieving the highest possible score.
 
-⚙️ **Settings**
+---
 
-* Audio ON/OFF
-* Graphics quality settings
-* Bloom ON/OFF
-* In-game settings interface
+# 🚀 Boost System
 
-⏸ **Pause System**
+Use the boost ability to temporarily increase movement speed.
 
-* Pause the game at any time
-* Resume gameplay
-* Restart the current game
-* Supports `P` / `ESC`
+### Desktop
 
-📱 **Mobile Controls**
+```text
+SHIFT
+```
 
-* Virtual joystick for steering
-* Touch-based JUMP button
-* Touch-based BOOST button
-* Responsive mobile interface
+### Mobile
 
-🖥 **Standalone Desktop Mode**
+```text
+BOOST
+```
 
-* Includes a Windows launcher
-* Starts a local PowerShell HTTP server
-* Automatically opens the game in Microsoft Edge App Mode
-* No browser address bar or tabs
-* Automatically stops the local server after closing the game
+The game provides a real-time boost meter:
+
+```text
+BOOST 100%
+████████████████████
+```
+
+---
+
+# 🦘 Jump System
+
+The snake can jump through the voxel environment.
+
+### Desktop
+
+```text
+SPACE
+```
+
+### Mobile
+
+```text
+JUMP
+```
+
+The HUD displays the current jump status and recharge meter.
+
+---
+
+# 🎯 Game Modes
+
+BLOCK SNAKE 3D includes multiple gameplay options.
+
+### 🐍 Start Game
+
+Start the standard game experience and progress through the voxel world.
+
+### ♾️ Endless Mode
+
+Play continuously and attempt to achieve the highest possible score and longest snake.
+
+---
+
+# 📊 Live Game HUD
+
+The game provides a real-time arcade-style HUD.
+
+### Score
+
+```text
+SCORE
+0
+
+HIGH: 0
+```
+
+### Snake Status
+
+```text
+LENGTH
+0
+
+LEVEL
+1
+```
+
+### Objective
+
+```text
+APPLES 0/8
+```
+
+### Ability Meters
+
+```text
+BOOST 100%
+
+JUMP READY
+```
+
+This allows the player to monitor important gameplay information without leaving the game.
+
+---
+
+# ⏸️ Pause System
+
+The game can be paused at any time.
+
+### Keyboard
+
+```text
+P
+```
+
+or
+
+```text
+ESC
+```
+
+The pause menu provides:
+
+* ▶️ Resume
+* 🔄 Restart
+
+---
+
+# ⚙️ Settings
+
+The game includes an integrated settings interface.
+
+Available options include:
+
+### 🔊 Audio
+
+Toggle game audio.
+
+```text
+ON / OFF
+```
+
+### 🎨 Graphics
+
+Adjust the graphics quality.
+
+```text
+ULTRA
+```
+
+### ✨ Bloom
+
+Toggle visual bloom effects.
+
+```text
+ON / OFF
+```
+
+---
+
+# 📱 Mobile Support
+
+BLOCK SNAKE 3D includes touch controls for mobile devices.
+
+### Virtual Joystick
+
+The left-side joystick controls snake movement.
+
+```text
+┌─────────────┐
+│             │
+│   JOYSTICK  │
+│    STEER    │
+│             │
+└─────────────┘
+```
+
+### Action Buttons
+
+The right side provides:
+
+```text
+┌─────────┐
+│  JUMP   │
+└─────────┘
+
+┌─────────┐
+│  BOOST  │
+└─────────┘
+```
+
+The interface is designed to adapt to smaller screens.
+
+---
+
+# 🖥️ Desktop Controls
+
+| Key     | Action             |
+| ------- | ------------------ |
+| `W`     | Move               |
+| `A`     | Move               |
+| `S`     | Move               |
+| `D`     | Move               |
+| `↑`     | Move               |
+| `↓`     | Move               |
+| `←`     | Move               |
+| `→`     | Move               |
+| `SHIFT` | Boost              |
+| `SPACE` | Jump               |
+| `P`     | Pause              |
+| `ESC`   | Pause / Exit Pause |
+
+---
+
+# 🎮 Gameplay
+
+The core gameplay loop is:
+
+```text
+              🐍 START
+                 │
+                 ▼
+        ENTER VOXEL WORLD
+                 │
+                 ▼
+           FIND APPLES 🍎
+                 │
+                 ▼
+          COLLECT APPLES
+                 │
+                 ▼
+          GROW YOUR SNAKE
+                 │
+                 ▼
+          INCREASE SCORE
+                 │
+                 ▼
+        AVOID YOUR OWN TAIL
+                 │
+                 ▼
+          AVOID OBSTACLES
+                 │
+                 ▼
+              SURVIVE
+                 │
+                 ▼
+         BEAT HIGH SCORE 🏆
+```
+
+---
+
+# 🖥️ Game Screens
+
+## 🔄 Loading Screen
+
+The loading screen initializes the game environment.
+
+Example:
+
+```text
+INITIALIZING
+
+Generating Voxel Worlds...
+████████████████████
+```
+
+---
+
+## 🐍 Start Screen
+
+The start screen provides:
+
+* Game title
+* Game description
+* Controls
+* Start Game
+* Endless Mode
+* Creator information
+* License information
+
+---
+
+## ⏸️ Pause Screen
+
+The pause interface provides:
+
+```text
+PAUSED
+
+RESUME
+RESTART
+```
+
+---
+
+## ⚙️ Settings Screen
+
+The settings interface provides:
+
+```text
+SETTINGS
+
+Audio       ON
+Graphics    ULTRA
+Bloom       ON
+
+CLOSE
+```
+
+---
+
+## 💀 Game Over Screen
+
+When the player loses, the game displays:
+
+```text
+SYSTEM FAILURE
+
+GAME OVER
+```
+
+Statistics include:
+
+* Final Score
+* High Score
+* Apples
+* Length
+
+The player can then select:
+
+```text
+► RETRY
+```
+
+---
+
+# 🎨 Visual Design
+
+BLOCK SNAKE 3D uses a retro-futuristic arcade design.
+
+### Visual characteristics
+
+* 🔵 Neon blue UI
+* 🟢 Bright voxel snake
+* 🍎 Pixel-style apples
+* 🌌 Dark 3D environment
+* ✨ Glow effects
+* 💡 Bloom effects
+* 🔲 Pixel panels
+* 🎮 Arcade HUD
+* 🧊 Voxel-style objects
+* 🌐 WebGL rendering
+
+---
+
+# 🔤 Typography
+
+The interface uses retro gaming fonts:
+
+```text
+Press Start 2P
+Silkscreen
+```
+
+These fonts help create the classic arcade / 16-bit aesthetic.
 
 ---
 
 # 🛠️ Technologies Used
 
-| Technology        | Purpose                       |
-| ----------------- | ----------------------------- |
-| 🌐 HTML5          | Game interface and structure  |
-| 🎨 CSS3           | UI, HUD and visual styling    |
-| ⚡ JavaScript      | Game logic and interaction    |
-| 🎮 Three.js       | 3D rendering and WebGL        |
-| 🧊 WebGL          | Hardware-accelerated graphics |
-| 🖥 PowerShell     | Local development server      |
-| 📦 Microsoft Edge | Standalone App Mode           |
+| Technology        | Purpose                          |
+| ----------------- | -------------------------------- |
+| 🌐 HTML5          | Game structure and interface     |
+| 🎨 CSS3           | UI styling and responsive design |
+| ⚡ JavaScript      | Game logic and interaction       |
+| 🎮 Three.js       | 3D rendering                     |
+| 🧊 WebGL          | Hardware-accelerated graphics    |
+| 🖥️ PowerShell    | Local HTTP server                |
+| 📦 Microsoft Edge | Standalone App Mode              |
 
-The project imports **Three.js v0.160.0** directly through a browser import map.
+---
+
+# 🌐 Three.js
+
+The game uses **Three.js** to render the 3D voxel environment.
+
+The project currently imports:
+
+```text
+Three.js v0.160.0
+```
+
+using a browser import map.
+
+The Three.js modules are loaded from:
+
+```text
+https://unpkg.com/three@0.160.0/
+```
+
+This means a separate local Three.js installation is not required.
 
 ---
 
@@ -109,37 +489,87 @@ The project imports **Three.js v0.160.0** directly through a browser import map.
 BLOCK-SNAKE-3D/
 │
 ├── 📁 css/
+│   └── styles.css
 │
 ├── 📁 js/
+│   └── main.js
 │
-├── 📄 LICENSE
-├── 📄 README.md
 ├── 📄 index.html
-├── 📄 launch.bat
-├── 📄 launch.vbs
+├── 📄 README.md
+├── 📄 LICENSE
+│
 ├── 🖼️ logo.png
-├── 📄 server.log
-└── 📄 server.ps1
+│
+├── 🖥️ launch.bat
+├── 🖥️ launch.vbs
+│
+├── ⚡ server.ps1
+└── 📄 .gitignore
 ```
+
+### Main Files
+
+| File             | Description                       |
+| ---------------- | --------------------------------- |
+| `index.html`     | Main game entry point             |
+| `css/styles.css` | Game interface and visual styling |
+| `js/main.js`     | Main game logic                   |
+| `logo.png`       | Project logo                      |
+| `server.ps1`     | Local HTTP server                 |
+| `launch.bat`     | Windows game launcher             |
+| `launch.vbs`     | Silent launcher                   |
+| `LICENSE`        | MIT license                       |
+| `.gitignore`     | Ignored temporary files           |
 
 ---
 
 # ⚙️ Requirements
 
-Before running the game, make sure you have:
+To run the game using the included Windows launcher:
 
 * 🪟 Windows
 * 🌐 Microsoft Edge
-* 💻 A modern computer with WebGL support
 * ⚡ PowerShell
+* 💻 Modern computer
+* 🧊 WebGL-compatible graphics hardware
 
-No Python installation or `npm install` is required for the included launcher.
+The included launcher does **not** require:
+
+```text
+Python
+Node.js
+npm
+```
+
+The browser loads Three.js through the configured import map.
 
 ---
 
-# 🚀 Running the Game
+# 🚀 Installation
+
+## 1. Clone the Repository
+
+```bash
+git clone https://github.com/rsamwilson2323-cloud/BLOCK-SNAKE-3D.git
+```
+
+Move into the project directory:
+
+```bash
+cd BLOCK-SNAKE-3D
+```
+
+---
+
+# ▶️ Run the Game
 
 ## Method 1 — Windows Launcher
+
+The easiest method is to run:
+
+```text
+launch.bat
+```
 
 Simply double-click:
 
@@ -147,32 +577,75 @@ Simply double-click:
 launch.bat
 ```
 
-The launcher will:
+The launcher handles the local server and game startup automatically.
 
-1. Start the PowerShell local HTTP server
-2. Use port `8000`
-3. Wait for the server to initialize
-4. Open Microsoft Edge in App Mode
-5. Launch the game at:
+---
+
+# 🔄 How The Launcher Works
+
+The launcher performs the following process:
 
 ```text
+launch.bat
+     │
+     ▼
+Start PowerShell Server
+     │
+     ▼
+Wait for Server
+     │
+     ▼
+Start Microsoft Edge
+     │
+     ▼
+Edge App Mode
+     │
+     ▼
 http://localhost:8000
+     │
+     ▼
+BLOCK SNAKE 3D
+     │
+     ▼
+Player Closes Game
+     │
+     ▼
+Stop Background Server
 ```
 
-6. Wait until the game window is closed
-7. Terminate the background server
+This provides a standalone desktop-like experience without requiring a traditional desktop application.
+
+---
+
+# 🖥️ Edge App Mode
+
+The launcher opens the game using Microsoft Edge App Mode.
+
+Instead of opening the game in a normal browser tab, it creates a standalone application-style window.
+
+This means the game can run without the usual:
+
+```text
+Address Bar
+Tabs
+Browser Navigation UI
+```
+
+The result feels more like a dedicated desktop game.
 
 ---
 
 # ▶️ Manual Server Start
 
-You can also start the server manually using PowerShell:
+If you do not want to use the launcher, start the server manually.
+
+Open PowerShell in the project directory and run:
 
 ```powershell
 powershell -ExecutionPolicy Bypass -File server.ps1
 ```
 
-The server runs at:
+The local server will be available at:
 
 ```text
 http://localhost:8000/
@@ -182,199 +655,35 @@ Then open the address in Microsoft Edge.
 
 ---
 
-# 🎮 Controls
-
-## 🖥️ Desktop
-
-| Key             | Action             |
-| --------------- | ------------------ |
-| `W`             | Move               |
-| `A`             | Move               |
-| `S`             | Move               |
-| `D`             | Move               |
-| `↑` `↓` `←` `→` | Move               |
-| `SHIFT`         | Boost              |
-| `SPACE`         | Jump               |
-| `P`             | Pause              |
-| `ESC`           | Pause / Exit pause |
-
----
-
-## 📱 Mobile
-
-Use the on-screen controls:
-
-```text
-        ┌─────────────┐
-        │   JOYSTICK  │
-        │    STEER    │
-        └─────────────┘
-
-              JUMP
-
-             BOOST
-```
-
-The left virtual joystick controls movement.
-
-The right-side buttons provide:
-
-* JUMP
-* BOOST
-
----
-
-# 🎯 Gameplay
-
-The objective is simple:
-
-```text
-ENTER THE VOXEL WORLD
-        ↓
-COLLECT APPLES 🍎
-        ↓
-GROW YOUR SNAKE 🐍
-        ↓
-AVOID YOUR TAIL
-        ↓
-AVOID OBSTACLES
-        ↓
-SURVIVE
-        ↓
-GET THE HIGHEST SCORE
-```
-
-The game HUD continuously displays:
-
-```text
-SCORE
-HIGH SCORE
-
-LENGTH
-LEVEL
-
-APPLES
-
-BOOST
-JUMP
-```
-
----
-
-# 🖥️ Game Interface
-
-The game includes several interface screens:
-
-### 🔄 Loading Screen
-
-Displays the initialization process while the voxel world is being generated.
-
-### 🐍 Start Screen
-
-Provides:
-
-* Game title
-* Game description
-* Controls
-* Start Game
-* Endless Mode
-
-### ⏸ Pause Screen
-
-Provides:
-
-* Resume
-* Restart
-
-### ⚙️ Settings Screen
-
-Provides:
-
-* Audio
-* Graphics
-* Bloom
-
-### 💀 Game Over Screen
-
-Displays:
-
-* Final Score
-* High Score
-* Apples
-* Length
-* Retry button
-
----
-
-# 🎨 Visual Design
-
-BLOCK SNAKE 3D uses a retro arcade-inspired interface featuring:
-
-* 🟦 Neon blue interface elements
-* 🟩 Voxel-style gameplay
-* 🔲 Pixel panels
-* 👾 Retro typography
-* ✨ Glow and bloom effects
-* 🎮 Arcade-inspired HUD
-* 🌌 3D WebGL environment
-
-The interface uses:
-
-```text
-Press Start 2P
-Silkscreen
-```
-
-for the retro gaming aesthetic.
-
----
-
-# 🌐 Three.js
-
-The game uses **Three.js** for 3D rendering.
-
-The browser import map loads:
-
-```text
-Three.js 0.160.0
-```
-
-from the official Three.js CDN:
-
-```text
-https://unpkg.com/three@0.160.0/
-```
-
-No local Three.js installation is required.
-
----
-
 # 🖥️ Local Server
 
-The project includes a lightweight PowerShell HTTP server.
+The project contains a lightweight PowerShell HTTP server.
 
-The server:
+The server runs on:
 
-* Runs on port `8000`
-* Serves HTML files
-* Serves CSS files
-* Serves JavaScript files
-* Serves JSON files
-* Serves PNG/JPG/SVG assets
-* Adds CORS headers
-* Provides the game locally
+```text
+localhost:8000
+```
 
-Server address:
+It is designed to serve the game's web assets locally.
+
+### Server URL
 
 ```text
 http://localhost:8000/
 ```
 
+### Port
+
+```text
+8000
+```
+
 ---
 
-# 📦 Supported Assets
+# 📦 Supported Web Assets
 
-The local server is configured to serve:
+The local server is configured to handle common web/game assets such as:
 
 ```text
 .html
@@ -386,7 +695,7 @@ The local server is configured to serve:
 .svg
 ```
 
-Other file types are served as:
+Other file types can be served using:
 
 ```text
 application/octet-stream
@@ -396,19 +705,19 @@ application/octet-stream
 
 # 🔧 Configuration
 
-The server port can be changed inside:
+The server configuration can be modified in:
 
 ```text
 server.ps1
 ```
 
-Current configuration:
+The default port is:
 
 ```powershell
 $port = 8000
 ```
 
-If you change the port, also update the URL inside:
+If the port is changed, update the game URL used by:
 
 ```text
 launch.bat
@@ -417,16 +726,16 @@ launch.bat
 For example:
 
 ```text
-http://localhost:8000
+http://localhost:9000
 ```
 
 ---
 
-# 🛡️ Git Ignore
+# 🛡️ .gitignore
 
-Temporary and system-generated files are excluded using `.gitignore`.
+Temporary and operating-system-generated files should not be committed to the repository.
 
-Ignored files include:
+The project ignores files such as:
 
 ```text
 server.log
@@ -435,63 +744,521 @@ Thumbs.db
 *.tmp
 ```
 
+This helps keep the repository clean.
+
+> 💡 `server.log` is a runtime-generated file and does not need to be included in the source repository.
+
+---
+
+# 🧩 Architecture
+
+The project can be understood as four main layers:
+
+```text
+┌────────────────────────────────────────┐
+│             BLOCK SNAKE 3D             │
+├────────────────────────────────────────┤
+│                                        │
+│  🎨 UI / HUD                           │
+│  HTML + CSS                            │
+│                                        │
+├────────────────────────────────────────┤
+│                                        │
+│  🎮 GAME LOGIC                         │
+│  JavaScript                            │
+│                                        │
+├────────────────────────────────────────┤
+│                                        │
+│  🌐 3D ENGINE                          │
+│  Three.js + WebGL                      │
+│                                        │
+├────────────────────────────────────────┤
+│                                        │
+│  🖥️ LOCAL SERVER                       │
+│  PowerShell                            │
+│                                        │
+└────────────────────────────────────────┘
+```
+
+---
+
+# 🔁 Game Flow
+
+```text
+PAGE LOAD
+    │
+    ▼
+INITIALIZING
+    │
+    ▼
+GENERATE VOXEL WORLD
+    │
+    ▼
+START SCREEN
+    │
+    ├───────────────┐
+    ▼               ▼
+START GAME      ENDLESS MODE
+    │               │
+    └───────┬───────┘
+            ▼
+       GAMEPLAY
+            │
+      ┌─────┼─────┐
+      ▼     ▼     ▼
+   APPLE  BOOST  JUMP
+      │     │     │
+      └─────┼─────┘
+            ▼
+       COLLISION?
+        /       \
+      YES        NO
+       │          │
+       ▼          │
+   GAME OVER      │
+       │          │
+       ▼          │
+     RETRY ◄──────┘
+```
+
+---
+
+# 🏆 Scoring
+
+The game tracks several important gameplay statistics:
+
+```text
+SCORE
+HIGH SCORE
+APPLES
+LENGTH
+LEVEL
+```
+
+These values are displayed through the live HUD and the Game Over screen.
+
+---
+
+# 📊 Game Over Statistics
+
+After a game ends, the statistics panel displays:
+
+| Statistic      | Description                    |
+| -------------- | ------------------------------ |
+| 🏆 Final Score | Score achieved during the game |
+| 👑 High Score  | Highest recorded score         |
+| 🍎 Apples      | Apples collected               |
+| 🐍 Length      | Final snake length             |
+
+---
+
+# 🎮 Player Experience
+
+The intended gameplay experience is:
+
+```text
+        🐍
+        │
+        ▼
+   EXPLORE WORLD
+        │
+        ▼
+     FIND 🍎
+        │
+        ▼
+    COLLECT IT
+        │
+        ▼
+   SNAKE GROWS
+        │
+        ▼
+    SCORE RISES
+        │
+        ▼
+   GO FASTER 🚀
+        │
+        ▼
+      JUMP 🦘
+        │
+        ▼
+ AVOID COLLISIONS
+        │
+        ▼
+   BEAT YOUR SCORE
+```
+
+---
+
+# 📱 Responsive Gameplay
+
+The project includes dedicated touch controls for smaller screens.
+
+The interface can switch between:
+
+### Desktop
+
+```text
+Keyboard Controls
+W A S D
+Arrow Keys
+SHIFT
+SPACE
+P / ESC
+```
+
+### Mobile
+
+```text
+Virtual Joystick
+JUMP
+BOOST
+```
+
+This allows the same game to be experienced across different device types.
+
+---
+
+# 🔊 Audio
+
+The game includes an audio control within the HUD and settings interface.
+
+Players can toggle audio from:
+
+```text
+HUD → Audio Button
+```
+
+or:
+
+```text
+Settings → Audio
+```
+
+---
+
+# ✨ Graphics & Bloom
+
+The Settings screen includes graphics and bloom controls.
+
+```text
+Graphics → ULTRA
+
+Bloom → ON
+```
+
+Bloom contributes to the game's neon arcade visual appearance.
+
+---
+
+# 🧪 Development
+
+To modify the project:
+
+### HTML
+
+Edit:
+
+```text
+index.html
+```
+
+### Styling
+
+Edit:
+
+```text
+css/styles.css
+```
+
+### Game Logic
+
+Edit:
+
+```text
+js/main.js
+```
+
+### Local Server
+
+Edit:
+
+```text
+server.ps1
+```
+
+### Launcher
+
+Edit:
+
+```text
+launch.bat
+```
+
+or:
+
+```text
+launch.vbs
+```
+
+---
+
+# 🐛 Troubleshooting
+
+## ❌ Game Does Not Open
+
+Make sure Microsoft Edge is installed.
+
+Then try opening:
+
+```text
+http://localhost:8000/
+```
+
+manually.
+
+---
+
+## ❌ Port 8000 Already In Use
+
+Another application may already be using port `8000`.
+
+Change the port in:
+
+```text
+server.ps1
+```
+
+and update the corresponding URL in:
+
+```text
+launch.bat
+```
+
+---
+
+## ❌ Game Shows a Blank Screen
+
+Check that:
+
+```text
+index.html
+css/
+js/
+```
+
+exist in the correct locations.
+
+Also check the browser developer console for JavaScript errors.
+
+---
+
+## ❌ Three.js Does Not Load
+
+The project loads Three.js from the configured CDN.
+
+Make sure the computer has an active internet connection when the game starts.
+
+---
+
+## ❌ Touch Controls Are Not Visible
+
+Touch controls are designed for touch-capable devices.
+
+On desktop, keyboard controls are used instead.
+
 ---
 
 # 🚀 Future Improvements
 
-Possible future additions:
+Possible future additions include:
 
-🔊 Advanced game sound effects
+### 🎵 Audio
 
-🎵 Background music
+* Advanced sound effects
+* Background music
+* Dynamic gameplay audio
+* Environmental sounds
 
-🏆 Global leaderboard
+### 🏆 Progression
 
-💾 Save/load game progress
+* Global leaderboard
+* Achievements
+* Player statistics
+* Persistent high scores
+* Save/load system
 
-🌍 More voxel environments
+### 🐍 Customization
 
-🐍 Different snake skins
+* Multiple snake skins
+* Custom snake colors
+* Unlockable designs
+* Special effects
 
-🍎 More collectible items
+### 🌍 World
 
-👾 Enemy characters
+* Multiple voxel environments
+* More obstacles
+* New maps
+* Dynamic weather
+* Day/night cycle
+* Environmental effects
 
-🧱 More obstacle types
+### 👾 Gameplay
 
-🌧️ Dynamic weather
+* Enemy characters
+* Boss encounters
+* Additional collectibles
+* Power-ups
+* Special abilities
 
-🌅 Day/night cycle
+### 🎮 Input
 
-🎮 Gamepad support
+* Gamepad support
+* Improved touch controls
+* Custom keyboard mapping
 
-📱 Improved mobile optimization
+### 🌐 Multiplayer
 
-🌐 Online multiplayer
+* Online multiplayer
+* Competitive game modes
+* Multiplayer leaderboards
 
-🏆 Achievement system
+---
 
-📈 Detailed player statistics
+# 🤝 Contributing
+
+Contributions and improvements are welcome.
+
+### 1. Fork the repository
+
+```bash
+git fork
+```
+
+### 2. Clone your fork
+
+```bash
+git clone https://github.com/YOUR-USERNAME/BLOCK-SNAKE-3D.git
+```
+
+### 3. Create a feature branch
+
+```bash
+git checkout -b feature/my-new-feature
+```
+
+### 4. Make your changes
+
+Improve the gameplay, UI, performance, controls, or documentation.
+
+### 5. Commit your changes
+
+```bash
+git add .
+git commit -m "Add new feature"
+```
+
+### 6. Push your branch
+
+```bash
+git push origin feature/my-new-feature
+```
+
+### 7. Open a Pull Request
+
+Submit your changes for review.
+
+---
+
+# 📌 Repository
+
+The official project repository is available here:
+
+**https://github.com/rsamwilson2323-cloud/BLOCK-SNAKE-3D**
+
+```text
+🐍 BLOCK-SNAKE-3D
+│
+├── 3D Voxel Gameplay
+├── Neon Arcade UI
+├── Apple Collection
+├── Snake Growth
+├── Boost
+├── Jump
+├── Campaign Mode
+├── Endless Mode
+├── Mobile Controls
+├── Settings
+├── Pause System
+└── Windows App Launcher
+```
+
+---
+
+# 📸 Screenshots
+
+You can add game screenshots to this section as the project develops.
+
+Example:
+
+```markdown
+![Game Screenshot](screenshots/gameplay.png)
+```
+
+Recommended screenshots:
+
+```text
+screenshots/
+│
+├── gameplay.png
+├── start-screen.png
+├── pause-screen.png
+├── settings.png
+└── game-over.png
+```
+
+---
+
+# 🏅 Project Highlights
+
+```text
+╔══════════════════════════════════════════╗
+║                                          ║
+║             🐍 BLOCK SNAKE 3D            ║
+║                                          ║
+║          ◆ VOXEL EDITION ◆              ║
+║                                          ║
+║        COLLECT • GROW • SURVIVE         ║
+║                                          ║
+║       🎮 3D WEBGL ARCADE GAME 🎮        ║
+║                                          ║
+╚══════════════════════════════════════════╝
+```
 
 ---
 
 # ⚠️ Disclaimer
 
-This project is intended for **educational, experimental, and entertainment purposes**.
+BLOCK SNAKE 3D is intended for:
 
-The game is provided as a browser-based personal project and should not be considered a professional commercial game engine or production-grade multiplayer system.
+* Educational purposes
+* Experimental development
+* Game development learning
+* Entertainment
+
+The project is a browser-based game and is not intended to replace a professional commercial game engine or production-grade multiplayer infrastructure.
 
 ---
 
 # 👨‍💻 Creator & Developer
 
-**Chahek Sinha**
+## **Chahek Sinha**
 
-🎮 Project: **BLOCK SNAKE 3D**
+🎮 **Project:** BLOCK SNAKE 3D
 
-📅 License: **MIT**
+📅 **Year:** 2026
 
-📅 Year: **2026**
+📜 **License:** MIT
 
 ---
 
@@ -501,29 +1268,72 @@ This project is licensed under the **MIT License**.
 
 You are free to:
 
-* Use the project
-* Modify the source code
-* Study the implementation
-* Distribute copies
-* Create derivative projects
+* ✅ Use the project
+* ✅ Study the source code
+* ✅ Modify the project
+* ✅ Create derivative works
+* ✅ Distribute copies
+* ✅ Use it for learning and development
 
-subject to the terms of the MIT License.
+Subject to the conditions of the MIT License.
+
+See the complete license in:
+
+```text
+LICENSE
+```
 
 ---
 
-# ⭐ Project
+# ⭐ Support The Project
+
+If you like **BLOCK SNAKE 3D**, consider:
+
+⭐ Starring the repository
+
+🐛 Reporting bugs
+
+💡 Suggesting features
+
+🔧 Contributing improvements
+
+📢 Sharing the project
+
+---
+
+# 🐍 Final Message
 
 ```text
 ╔══════════════════════════════════════╗
+║                                      ║
 ║          BLOCK SNAKE 3D              ║
 ║                                      ║
-║       🐍  VOXEL EDITION  🍎          ║
+║       🐍 VOXEL EDITION 🍎            ║
 ║                                      ║
-║      COLLECT • GROW • SURVIVE        ║
+║     COLLECT • GROW • SURVIVE         ║
+║                                      ║
+║          🚀 BOOST                    ║
+║          🦘 JUMP                     ║
+║          🍎 COLLECT                  ║
+║          🏆 SURVIVE                  ║
+║                                      ║
 ╚══════════════════════════════════════╝
 ```
 
-**Enter the voxel world.
-Collect apples.
-Grow your snake.
-Survive as long as possible. 🐍🍎🎮**
+### 🎮 Enter the voxel world.
+
+### 🍎 Collect the apples.
+
+### 🐍 Grow your snake.
+
+### 🚀 Use your abilities.
+
+### 🏆 Beat your high score.
+
+**Have fun and keep slithering! 🐍🍎🎮**
+
+---
+
+<p align="center">
+  <strong>🐍 BLOCK SNAKE 3D • VOXEL EDITION • 2026 🐍</strong>
+</p>
